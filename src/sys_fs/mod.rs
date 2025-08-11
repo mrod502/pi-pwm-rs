@@ -34,13 +34,19 @@ impl SysFsPwm {
 impl PwmRead for SysFsPwm {
     type Error = ();
     fn get_duty_cycle(&self, interface: u8) -> Result<usize, Self::Error> {
-        Err(())
+        match self.read(interface, "duty_cycle") {
+            Ok(r) => Ok(r),
+            Err(_) => Err(()),
+        }
     }
     fn get_enabled(&self, interface: u8) -> Result<bool, Self::Error> {
         Ok(true)
     }
     fn get_period(&self, interface: u8) -> Result<usize, Self::Error> {
-        Err(())
+        match self.read(interface, "period") {
+            Ok(r) => Ok(r),
+            Err(_) => Err(()),
+        }
     }
     fn get_polarity(&self, interface: u8) -> Result<Polarity, Self::Error> {
         Ok(Polarity::Normal)
