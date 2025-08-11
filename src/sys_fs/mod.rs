@@ -24,8 +24,9 @@ impl SysFsPwm {
             self.get_path()
                 .join(format!("pwm{}", channel))
                 .join(segment),
-        )?;
-        println!("path:{}", f);
+        )?
+        .trim()
+        .to_string();
 
         Ok(usize::from_str_radix(&f, 10).unwrap_or(0))
     }
